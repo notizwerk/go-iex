@@ -14,6 +14,10 @@ IEX provides realtime and historical market data for free through the IEX Develo
 By using the IEX API, you agree to the [Terms of Use](https://www.iextrading.com/api-terms/). IEX is not affiliated
 and does not endorse or recommend this library.
 
+## why another fork?
+
+We wanted a smaller json representation of the IEX messages and shortened the property names.
+
 ## Usage
 
 ### pcap2csv
