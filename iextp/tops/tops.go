@@ -412,21 +412,21 @@ const (
 // of trading, IEX publishes a "zero quote" (Bid Price, Bid Size, Ask Price,
 // and Ask Size are zero) for all symbols in the IEX trading system.
 type QuoteUpdateMessage struct {
-	MessageType uint8
-	Flags       uint8
+	MessageType uint8 `json:"m"`
+	Flags       uint8 `json:"f"`
 	// The time an event triggered the quote update as set by the IEX Trading
 	// System logic.
-	Timestamp time.Time
+	Timestamp time.Time `json:"t"`
 	// Quoted symbol representation in Nasdaq integrated symbology.
-	Symbol string
+	Symbol string `json:"s"`
 	// Size of the quote at the bid, in number of shares.
-	BidSize uint32
+	BidSize uint32 `json:"bs"`
 	// Price of the quote at the bid.
-	BidPrice float64
+	BidPrice float64 `json:"bp"`
 	// Price of the quote at the ask.
-	AskPrice float64
+	AskPrice float64 `json:"ap"`
 	// Size of the quote at the ask, in number of shares.
-	AskSize uint32
+	AskSize uint32 `json:"as"`
 }
 
 func (m *QuoteUpdateMessage) Unmarshal(buf []byte) error {
@@ -459,20 +459,20 @@ func (m *QuoteUpdateMessage) IsRegularMarketSession() bool {
 // is executed in whole or in part. TOPS sends a TradeReportMessage
 // for every individual fill.
 type TradeReportMessage struct {
-	MessageType        uint8
-	SaleConditionFlags uint8
+	MessageType        uint8 `json:"m"`
+	SaleConditionFlags uint8 `json:"f"`
 	// The time an event triggered the trade (i.e., execution) as set
 	// by the IEX Trading System logic.
-	Timestamp time.Time
+	Timestamp time.Time `json:"t"`
 	// Traded symbol represented in Nasdaq integrated symbology.
-	Symbol string
+	Symbol string `json:"s"`
 	// Size of the trade, in number of shares.
-	Size uint32
+	Size uint32 `json:"ts"`
 	// Execution price.
-	Price float64
+	Price float64 `json:"tp"`
 	// IEX generated trade identifier. A given trade is uniquely
 	// identified within a day by its TradeID.
-	TradeID int64
+	TradeID int64 `json:"i"`
 }
 
 func (m *TradeReportMessage) Unmarshal(buf []byte) error {
@@ -537,16 +537,16 @@ const (
 )
 
 type OfficialPriceMessage struct {
-	MessageType uint8
+	MessageType uint8 `json:"m"`
 	// Price type identifier (OpeningPrice or ClosingPrice).
-	PriceType uint8
+	PriceType uint8 `json:"pt"`
 	// The time an event triggered the official price calculation
 	// (e.g., auction match) as set by the IEX Trading System logic.
-	Timestamp time.Time
+	Timestamp time.Time `json:"t"`
 	// Security represented in Nasdaq Integrated symbology.
-	Symbol string
+	Symbol string `json:"s"`
 	// IEX Official Opening or Closing Price of an IEX-listed security.
-	OfficialPrice float64
+	OfficialPrice float64 `json:"op"`
 }
 
 func (m *OfficialPriceMessage) Unmarshal(buf []byte) error {
